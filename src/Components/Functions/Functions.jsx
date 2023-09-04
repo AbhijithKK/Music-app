@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './Functions.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCirclePlay,faCirclePause,faBackward,faForward} from '@fortawesome/free-solid-svg-icons'
-import { GetArtist, TokenEndpoint } from '../../Api/Api'
-export default function Functions({setSongs,AudioPlay,isPlaying}) {
-    const[track,setTracks]=useState('')
-    const Apis=async()=>{
-        let data=await TokenEndpoint()
-   let track=await GetArtist(data)
-   let newtr=`${track}`
-   setTracks(track)
-   setSongs(newtr)
-    }
-   useEffect(()=>{
-//   Apis()
-   },[setSongs])
+export default function Functions({AudioPlay,isPlaying, NextSong ,PrevSong}) {
+    
+    
   return (
    <>
+   <button type='button' onClick={PrevSong} style={{backgroundColor:'transparent',border:'0px'}}>
+
    <FontAwesomeIcon icon={faBackward } style={{height:'20px',cursor:'pointer'}} />
+   </button>
    <button type='button' onClick={AudioPlay} style={{backgroundColor:'transparent',border:'0px'}}>
     {
         isPlaying===false
@@ -29,7 +22,10 @@ export default function Functions({setSongs,AudioPlay,isPlaying}) {
     }
 
    </button>
+   <button type='button' onClick={NextSong} style={{backgroundColor:'transparent',border:'0px'}}>
    <FontAwesomeIcon icon={faForward } style={{height:'20px',cursor:'pointer'}} />
+ 
+   </button>
    </>
   )
 }

@@ -1,19 +1,28 @@
-import React, { useRef, useState } from "react";
+import React, {  useState } from "react";
 import "./Player.css";
 import Functions from "../Functions/Functions";
 import SelectFile from "../SelectFile/SelectFile";
 function Player() {
     const[song,setSongs]=useState('')
-    const[isPlaying,setIsplaying]=useState(false)
-    const audoRef=useRef(null)
+    const[nsong,setNsongs]=useState(false)
+    const[psong,setPsongs]=useState(false)
+    const[isPlaying,setIsplaying]=useState(false) 
     const AudioPlay=()=>{
-        if (audoRef.current.paused) {
-            audoRef.current.play()
+        if (isPlaying===false) {
+           song.play()
             setIsplaying(true)
         }else{
-            audoRef.current.pause()
+            song.pause()
             setIsplaying(false)
         }
+    }
+    const NextSong=()=>{
+         console.log('nextsong');
+         setNsongs(!nsong)
+    }
+    const PrevSong=()=>{
+        console.log('prevsong');
+        setPsongs(!psong)
     }
   return (
     <div className="container" style={{
@@ -22,7 +31,7 @@ function Player() {
         backgroundSize:'cover'
         
     }}>
-        <SelectFile/>
+        <SelectFile setSongs={setSongs} nsong={nsong} psong={psong} />
       <div className="Player-body">
         <div className="imageDiv">
           <img
@@ -35,11 +44,10 @@ function Player() {
         <div className="texts">
             names<br/>
             <p>artist</p>
-            <audio ref={audoRef} src={song} >aaaaa</audio>
         </div>
         
         <div className="function">
-          <Functions setSongs={setSongs}  AudioPlay={AudioPlay} isPlaying={isPlaying} />
+          <Functions song={song}  AudioPlay={AudioPlay} isPlaying={isPlaying} NextSong={NextSong} PrevSong={PrevSong} />
         </div>
       </div>
     </div>

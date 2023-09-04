@@ -16,11 +16,12 @@ const style = {
   p: 4,
 };
 
-export default function SelectFile() {
+export default function SelectFile({setSongs,nsong,psong}) {
   const [open, setOpen] = React.useState(false);
   const [audioRef, setAudioRef] = React.useState(null);
+  const[currentIndex,setCurrentIndex]=React.useState(0)
+  const[tracks,setTracks]=React.useState([])
 //   let ref = React.useRef(null);
-const[refresh,setRefresh]=React.useState(false)
   const handleClose = () => setOpen(false);
   React.useEffect(() => {
     setOpen(true);
@@ -37,22 +38,35 @@ const[refresh,setRefresh]=React.useState(false)
           audioFiles.push(entry);
         }
       });
+      setTracks(audioFiles)
       console.log("aud Files", audioFiles);
 
       if (audioFiles.length > 0) {
-        let Audi=new Audio(URL.createObjectURL(audioFiles[0]))
+        let Audi=new Audio(URL.createObjectURL(audioFiles[currentIndex]))
                 setAudioRef(Audi);
                
-                setRefresh(!refresh)
+                
       }
 
     }
+    console.log('rrr',tracks);
   };
+  const callback = React.useCallback(() => {
+    setSongs(audioRef);
+  }, [audioRef,setSongs]);
+  
   React.useEffect(() => {
     if (audioRef) {
-      audioRef.play();
+      callback();
     }
-  }, [audioRef]);
+  }, [audioRef, callback,tracks]);
+  React.useEffect(()=>{
+    if (tracks>0) {
+        console.log('ggg',tracks);
+        setCurrentIndex(currentIndex + 1) 
+      
+    }
+  },[nsong,tracks])
   return (
     <div>
       <Modal
