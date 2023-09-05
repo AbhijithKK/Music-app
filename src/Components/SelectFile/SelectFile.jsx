@@ -125,9 +125,8 @@ export default function SelectFile({setSongs,nsong,psong,setName}) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <input
               type="file"
-              directory=""
-              webkitdirectory=""
-              multiple=""
+             
+              multiple={true}
               onChange={SelectDirectory}
             />
           </Typography>
