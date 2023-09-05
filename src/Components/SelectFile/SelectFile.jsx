@@ -19,7 +19,7 @@ const style = {
 export default function SelectFile({setSongs,nsong,psong}) {
   const [open, setOpen] = React.useState(false);
   const [audioRef, setAudioRef] = React.useState(null);
-  const[currentIndex,setCurrentIndex]=React.useState(0)
+  let[currentIndex,setCurrentIndex]=React.useState(-1)
   const[tracks,setTracks]=React.useState([])
 //   let ref = React.useRef(null);
   const handleClose = () => setOpen(false);
@@ -41,16 +41,22 @@ export default function SelectFile({setSongs,nsong,psong}) {
       setTracks(audioFiles)
       console.log("aud Files", audioFiles);
 
-      if (audioFiles.length > 0) {
-        let Audi=new Audio(URL.createObjectURL(audioFiles[currentIndex]))
-                setAudioRef(Audi);
-               
-                
-      }
+      AudSett(audioFiles)
 
     }
-    console.log('rrr',tracks);
+ 
   };
+  const AudSett=(audioFiles)=>{
+    audioRef?.pause()
+    if (audioFiles.length > 0) {
+      let Audi=new Audio(URL.createObjectURL(audioFiles[currentIndex]))
+              setAudioRef(Audi);   
+              if (currentIndex!==0) {
+                Audi.play()
+              }    
+              
+    }
+  }
   const callback = React.useCallback(() => {
     setSongs(audioRef);
   }, [audioRef,setSongs]);
@@ -61,10 +67,13 @@ export default function SelectFile({setSongs,nsong,psong}) {
     }
   }, [audioRef, callback,tracks]);
   React.useEffect(()=>{
-    if (tracks>0) {
+    if (tracks) {
         console.log('ggg',tracks);
         setCurrentIndex(currentIndex + 1) 
-      
+        
+      AudSett(tracks)
+     
+
     }
   },[nsong,tracks])
   return (
