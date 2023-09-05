@@ -36,3 +36,33 @@ margin-top: 40px;
 .texts p{
     text-align: center;
 }
+@media (max-width:400px) {
+    .Player-body{
+        background-color:brown;
+        width: 450px;
+        height: 100vh;
+        
+    }
+    .imageDiv{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 130px;
+        }
+        .function{
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+         }
+         .texts{
+            margin-top: 50px;
+         }
+         .texts p{
+            margin-top: 120px;
+         }
+         .images{
+            width: 250px;
+            height: 150px;
+            border-radius: 10px;
+        }
+}
