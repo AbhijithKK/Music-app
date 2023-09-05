@@ -7,6 +7,7 @@ function Player() {
     const[nsong,setNsongs]=useState(false)
     const[psong,setPsongs]=useState(false)
     const[isPlaying,setIsplaying]=useState(false) 
+    const[name,setName]=useState(' ')
     const AudioPlay=()=>{
         if (isPlaying===false) {
            song.play()
@@ -31,7 +32,7 @@ function Player() {
         backgroundSize:'cover'
         
     }}>
-        <SelectFile setSongs={setSongs} nsong={nsong} psong={psong} />
+        <SelectFile setSongs={setSongs} nsong={nsong} psong={psong} setName={setName} />
       <div className="Player-body">
         <div className="imageDiv">
           <img
@@ -42,8 +43,8 @@ function Player() {
           
         </div>
         <div className="texts">
-            names<br/>
-            <p>artist</p>
+            {name}<br/>
+            <p><b>V1.1</b></p>
         </div>
         
         <div className="function">

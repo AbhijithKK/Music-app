@@ -7,7 +7,7 @@
 .Player-body{
     background-color:brown;
     width: 450px;
-    height: 250px;
+    height: 350px;
     border-radius: 10px;
     
     
@@ -22,14 +22,16 @@ margin-top: 40px;
 .images{
     width: 150px;
     height: 100px;
+    border-radius: 10px;
 }
 .function{
    display: flex;
    justify-content: center;
-   margin-top: 5px;
+   margin-top: 15px;
 }
 .texts{
     overflow: hidden;
+    scroll-behavior: auto;
 }
 .texts p{
     text-align: center;
