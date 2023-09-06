@@ -1,29 +1,44 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import "./Player.css";
 import Functions from "../Functions/Functions";
 import SelectFile from "../SelectFile/SelectFile";
 function Player() {
-    const[song,setSongs]=useState('')
-    const[nsong,setNsongs]=useState(false)
-    const[psong,setPsongs]=useState(false)
+    const[song,setSongs]=useState([])
     const[isPlaying,setIsplaying]=useState(false) 
     const[name,setName]=useState(' ')
+    const [AudiRef,setAudiref]=useState(null)
+useEffect(()=>{
+ 
+
+},[AudiRef])
+let i=0
     const AudioPlay=()=>{
-        if (isPlaying===false) {
-           song.play()
+        console.log(i);
+          if (song.length > 0 && song.length-1>=i) {
+            setName(song[i]?.name)
+            let Audi=new Audio(URL.createObjectURL(song[i]))
+            setAudiref(Audi)
+            Audi.addEventListener('ended', () => { // Move event listener assignment here
+              AudioPlay();
+             
+            })
+            Audi.play() 
+            i++
+                     
+          }else{
+            i=0
+            AudioPlay()
+          }
             setIsplaying(true)
-        }else{
-            song.pause()
-            setIsplaying(false)
-        }
+          
+       
     }
+
     const NextSong=()=>{
-         console.log('nextsong');
-         setNsongs(!nsong)
+        
     }
     const PrevSong=()=>{
-        console.log('prevsong');
-        setPsongs(!psong)
+       
     }
   return (
     <div className="container" style={{
@@ -32,7 +47,8 @@ function Player() {
         backgroundSize:'cover'
         
     }}>
-        <SelectFile setSongs={setSongs} nsong={nsong} psong={psong} setName={setName} />
+        <SelectFile setSongs={setSongs} />
+
       <div className="Player-body">
         <div className="imageDiv">
           <img
