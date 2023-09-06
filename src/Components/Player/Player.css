@@ -36,6 +36,21 @@ margin-top: 40px;
 .texts p{
     text-align: center;
 }
+
+
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background-color: #ccc;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #007bff; /* Change the color to your preference */
+    transition: width 0.1s ease-in-out;
+  }
+  
 @media (max-width:400px) {
     .Player-body{
         background-color:brown;
